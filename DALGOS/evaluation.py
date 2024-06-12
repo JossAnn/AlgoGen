@@ -2,6 +2,7 @@ import json
 import matplotlib.pyplot as plt
 import os
 
+#Recibe la poblacion
 def evaluateFitness(population):
     # Crear directorio para guardar las gráficas si no existe
     graphicDir = 'graphicGenerations'
@@ -46,14 +47,14 @@ def evaluateFitness(population):
 #        print(f"Index: {individuo[0]}, Binary: {individuo[1]}, x: {individuo[2]}, fx: {individuo[3]}")
 #    print(selectedIndivs)
 
-    # Guardar valores seleccionados en un archivo JSON
+    # Todo pa abajo guarda los 3 valores rescatados de cada generacion en un JSON
     jsonsDirPath = 'jsons'
     if not os.path.exists(jsonsDirPath):
         os.makedirs(jsonsDirPath)
 
     jsonFilePath = os.path.join(jsonsDirPath, "GeneJson.json")
 
-    # Leer contenido existente si el archivo ya existe
+    # Leer contenido existente del archivo
     if os.path.exists(jsonFilePath):
         with open(jsonFilePath, 'r') as jsonFile:
             try:
@@ -72,4 +73,18 @@ def evaluateFitness(population):
     with open(jsonFilePath, 'w') as jsonFileIs:
         json.dump(data, jsonFileIs, indent=4)
 
-    print(f"Datos seleccionados, en el JSON: {jsonFilePath}")
+    #print(f"Datos seleccionados, en el JSON: {jsonFilePath}")
+
+
+
+"""   
+FORMATO DEL GeneJson.json
+[
+    {
+        "fxMax": [4, "100", 6.0, 5.761021719902196],
+        "fxMin": [1, "001", 3.0, -2.9699774898013365],
+        "fxAvg": [0, "000", 2.0, -0.8322936730942848]
+    }
+]
+
+"""

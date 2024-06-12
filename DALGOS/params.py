@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from tkinter import ttk
 import json
@@ -10,10 +11,12 @@ def submit():
         "initialPopu": int(initialPopu.get()),
         "maxiPopu": int(maxiPopu.get()),
         "mutationIndiProba": float(mutationIndiProba.get()),
-        "mutationGenProba": float(mutationGenProba.get())
+        "mutationGenProba": float(mutationGenProba.get()),
+        "generationNumber": int(generationNumber.get())
     }
     print(json.dumps(params, indent=4))#se envia el json de parametros rescatado
     squaredParams.destroy()
+    
 
 squaredParams = tk.Tk()
 squaredParams.title("Parametrizacion de Maximizacion")
@@ -48,8 +51,8 @@ mutationGenProba = tk.Entry(squaredParams)
 mutationGenProba.grid(row=7, column=1)
 
 tk.Label(squaredParams, text="Numero de generaciones").grid(row=8, column=0)
-GenerationNumber = tk.Entry(squaredParams)
-GenerationNumber.grid(row=8, column=1)
+generationNumber = tk.Entry(squaredParams)
+generationNumber.grid(row=8, column=1)
 
 # Valores predeterminados
 valueA.insert(0, "2")
@@ -59,7 +62,7 @@ initialPopu.insert(0, "9")
 maxiPopu.insert(0, "27")
 mutationIndiProba.insert(0, "10")
 mutationGenProba.insert(0, "50")
-GenerationNumber.insert(0,"3")
+generationNumber.insert(0,"3")
 
 submit_button = tk.Button(squaredParams, text="Submit", command=submit)
 submit_button.grid(row=9, column=0, columnspan=2)
