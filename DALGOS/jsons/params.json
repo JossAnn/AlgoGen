@@ -1,0 +1,10 @@
+{
+    "valueA": 20,
+    "valueB": 90,
+    "deltaX": 1.0,
+    "initialPopu": 20,
+    "maxiPopu": 50,
+    "mutationIndiProba": 10.0,
+    "mutationGenProba": 50.0,
+    "generationNumber": 30
+}
