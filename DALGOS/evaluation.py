@@ -2,9 +2,9 @@ import json
 import matplotlib.pyplot as plt
 import os
 
-#Recibe la poblacion
+# Recibe la poblacion
 def evaluateFitness(population):
-    # Crear directorio para guardar las gráficas si no existe
+    # Crear directorio para guardar las graficas
     graphicDir = 'graphicGenerations'
     if not os.path.exists(graphicDir):
         os.makedirs(graphicDir)
@@ -14,20 +14,24 @@ def evaluateFitness(population):
     generacion = len(os.listdir(graphicDir)) + 1
 
     # Graficar valores fx
-    plt.figure()
-    plt.plot(fxValues, 'bo', label='fx values')  # Puntos
+    plt.figure(figsize=(10, 6))
+    plt.plot(fxValues, 'bo', label='fx values', markersize=4)  # Puntos
     plt.plot(fxValues, 'b-', alpha=0.5)  # Línea que conecta los puntos
-    plt.title(f'Generacion {generacion}')
-    plt.xlabel('Individuo')
-    plt.ylabel('fx')
+    plt.title(f'Generación {generacion}', fontsize=16, fontweight='bold')
+    plt.xlabel('Individuo', fontsize=14)
+    plt.ylabel('fx', fontsize=14)
     plt.legend()
+    plt.grid(True, linestyle='--', alpha=0.7)
 
-    # Guardar gráfica
+    #segun optimiza la grafica
+    plt.tight_layout()
+
+    # Guardar grafica
     graphicName = f'{graphicDir}/generation_{generacion}.png'
-    plt.savefig(graphicName)
+    plt.savefig(graphicName, dpi=300)
     plt.close()
 
-    # Seleccionar el valor más alto, más bajo y el promedio de 'fx'
+    # Seleccionar el valor mas alto, bajo y promedio de 'fx'
     fxMax = max(fxValues)
     fxMin = min(fxValues)
     fxAvg = sum(fxValues) / len(fxValues)
@@ -42,10 +46,6 @@ def evaluateFitness(population):
         "fxMin": minIndividuo,
         "fxAvg": avgIndividuo
     }
-
-#    for individuo in population:
-#        print(f"Index: {individuo[0]}, Binary: {individuo[1]}, x: {individuo[2]}, fx: {individuo[3]}")
-#    print(selectedIndivs)
 
     # Todo pa abajo guarda los 3 valores rescatados de cada generacion en un JSON
     jsonsDirPath = 'jsons'
@@ -73,7 +73,7 @@ def evaluateFitness(population):
     with open(jsonFilePath, 'w') as jsonFileIs:
         json.dump(data, jsonFileIs, indent=4)
 
-    #print(f"Datos seleccionados, en el JSON: {jsonFilePath}")
+    #print(f"Datos añadidos al JSON: {jsonFilePath}")
 
 
 

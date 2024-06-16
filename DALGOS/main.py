@@ -1,4 +1,3 @@
-#Aquí se ejecutará el flujo principal del algoritmo genético.
 import json
 from params import ventanaParametral
 from initpopu import initPopu
@@ -8,6 +7,7 @@ from cruza import crossOver
 from mutation import  mutations
 from podar import poda
 from render import activate
+from tqdm import tqdm
 
 def main():
     ventanaParametral()
@@ -18,17 +18,19 @@ def main():
     
     population = initPopu()
     
-    evaluateFitness(population)
-    """
+    evaluateFitness(population)#Esta es la evaluacion para la poblacion inicial por eso sale una mas
+    
     i=1
-    while i <= generationNumber:
-        
-        population = mutations(crossOver(pairing(population)))
-        print(len(population))
-        evaluateFitness(population)
-        population = poda(population)
-        i += 1
-    """
+    with tqdm(total=generationNumber, desc="Progreso de generaciones") as pbar:
+        while i <= generationNumber:
+            
+            population = mutations(crossOver(pairing(population)))#emparejamiento, cruza y mutacion
+            evaluateFitness(population)#evaluacion comun pero de "cursedPopulation"
+            population = poda(population)
+            pbar.update(1)
+            i += 1
+    
+    print("\n\nGENERANDO  VIDEO")
     activate()
 
 
