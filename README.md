@@ -16,3 +16,5 @@ Negación del bit
 
 Estrategia P3: (100 %)                  
 Dados los valores del fitness, generar clases, luego por clase mantener algunos individuos de manera aleatoria.
+
+ESTE ULTIMO COMMIT Y EL ANTERIOR NO TIENEN CAMBIOS, ME CONFUNDI DE REPO XD
