@@ -10,6 +10,47 @@ def crossOver(pairedPopulation):
     valueA = params["valueA"]
     valueB = params["valueB"]
     deltaX = params["deltaX"]
+    newPopulation = []
+    noPts = int(((valueB - valueA) / deltaX) + 1)
+    bitsNum = math.ceil(math.log2(noPts))
+
+    for pair in pairedPopulation:
+        individuo1, individuo2 = pair
+        puntosCruza = random.randint(1, bitsNum)
+        posiciones = random.sample(range(bitsNum), puntosCruza)
+        bits1 = list(individuo1[1])
+        bits2 = list(individuo2[1])
+        
+        for pos in posiciones:
+            bits1[pos], bits2[pos] = bits2[pos], bits1[pos]
+        newBitsChain1 = ''.join(bits1)
+        newBitsChain2 = ''.join(bits2)
+
+        indexS = [int(newBitsChain1, 2), int(newBitsChain2, 2)]
+        binIndexS = [newBitsChain1, newBitsChain2]
+        xS = [valueA + index * deltaX for index in indexS]
+        fxS = [x * math.cos(x) for x in xS]
+        individuos = [[index, binIndex, x, fx] for index, binIndex, x, fx in zip(indexS, binIndexS, xS, fxS)]
+        newPopulation.extend(individuos)
+        
+        for pair in pairedPopulation:
+            newPopulation.extend(pair)
+            
+    return newPopulation                                                                                            
+
+""" 
+import json
+import random
+import math
+
+def crossOver(pairedPopulation):
+    jsonParamsPath = "jsons/params.json"
+    with open(jsonParamsPath, "r") as json_file:
+        params = json.load(json_file)
+
+    valueA = params["valueA"]
+    valueB = params["valueB"]
+    deltaX = params["deltaX"]
     
     newPopulation = []
     
@@ -47,3 +88,4 @@ def crossOver(pairedPopulation):
             newPopulation.extend(pair)
             
     return newPopulation
+"""

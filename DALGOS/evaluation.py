@@ -2,9 +2,9 @@ import json
 import matplotlib.pyplot as plt
 import os
 
-# Recibe la poblacion
+# Recibe la población
 def evaluateFitness(population):
-    # Crear directorio para guardar las graficas
+    # Crear directorio para guardar las gráficas
     graphicDir = 'graphicGenerations'
     if not os.path.exists(graphicDir):
         os.makedirs(graphicDir)
@@ -17,23 +17,35 @@ def evaluateFitness(population):
     plt.figure(figsize=(10, 6))
     plt.plot(fxValues, 'bo', label='fx values', markersize=4)  # Puntos
     plt.plot(fxValues, 'b-', alpha=0.5)  # Línea que conecta los puntos
+
+    # Seleccionar el valor más alto y más bajo de 'fx'
+    fxMax = max(fxValues)
+    fxMin = min(fxValues)
+
+    # Encontrar los índices de los mejores y peores individuos
+    maxIndex = fxValues.index(fxMax)
+    minIndex = fxValues.index(fxMin)
+
+    # Resaltar los mejores y peores individuos
+    plt.scatter(maxIndex, fxMax, color='green', s=100, edgecolor='black', zorder=5, label='Best')
+    plt.scatter(minIndex, fxMin, color='red', s=100, edgecolor='black', zorder=5, label='Worst')
+
+    # Título y etiquetas de los ejes
     plt.title(f'Generación {generacion}', fontsize=16, fontweight='bold')
     plt.xlabel('Individuo', fontsize=14)
     plt.ylabel('fx', fontsize=14)
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.7)
 
-    #segun optimiza la grafica
+    # Optimizar la gráfica
     plt.tight_layout()
 
-    # Guardar grafica
+    # Guardar gráfica
     graphicName = f'{graphicDir}/generation_{generacion}.png'
     plt.savefig(graphicName, dpi=300)
     plt.close()
 
-    # Seleccionar el valor mas alto, bajo y promedio de 'fx'
-    fxMax = max(fxValues)
-    fxMin = min(fxValues)
+    # Seleccionar el valor promedio de 'fx'
     fxAvg = sum(fxValues) / len(fxValues)
 
     # Encontrar los individuos correspondientes
@@ -47,7 +59,7 @@ def evaluateFitness(population):
         "fxAvg": avgIndividuo
     }
 
-    # Todo pa abajo guarda los 3 valores rescatados de cada generacion en un JSON
+    # Guardar los valores rescatados de cada generación en un JSON
     jsonsDirPath = 'jsons'
     if not os.path.exists(jsonsDirPath):
         os.makedirs(jsonsDirPath)
@@ -73,8 +85,7 @@ def evaluateFitness(population):
     with open(jsonFilePath, 'w') as jsonFileIs:
         json.dump(data, jsonFileIs, indent=4)
 
-    #print(f"Datos añadidos al JSON: {jsonFilePath}")
-
+    # print(f"Datos añadidos al JSON: {jsonFilePath}")
 
 
 """   

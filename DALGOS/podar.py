@@ -12,7 +12,7 @@ def poda(cursedPopulation):
     
     #crear las clases y asignarles partes diferentes de la poblacion ordenada
     third_len = len(orderedPopulation) // 3
-    poorClass = orderedPopulation[:third_len]
+    #poorClass = orderedPopulation[:third_len]
     mediClass = orderedPopulation[third_len:2 * third_len]
     richClass = orderedPopulation[2 * third_len:]
 
@@ -27,8 +27,8 @@ def poda(cursedPopulation):
     selectedPopulation = random.sample(richClass, min(richSection, len(richClass)))
     mediSection = section * 2
     selectedPopulation += random.sample(mediClass, min(mediSection, len(mediClass)))
-    poorSection = section
-    selectedPopulation += random.sample(poorClass, min(poorSection, len(poorClass)))
+    #poorSection = section
+    #selectedPopulation += random.sample(poorClass, min(poorSection, len(poorClass)))
 
     #Comparacion delongitud, entre el arreglo selcto y la maxima de individuos permitidos
     if len(selectedPopulation) < maxiPopu:
